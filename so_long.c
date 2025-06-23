@@ -6,7 +6,7 @@
 /*   By: xx <xx@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:35:32 by xx                #+#    #+#             */
-/*   Updated: 2025/06/10 18:22:43 by xx               ###   ########.fr       */
+/*   Updated: 2025/06/23 13:29:03 by xx               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,32 @@ int	key_lib(int keycode, t_game *g)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	*g;
-	char	*map[] = {"11111111", "100C0E01", "100C0001", "1C000001",
-			"10110P01", "11111111", NULL};
 
+	if (argc != 2)
+		return (1);
 	g = malloc(sizeof(t_game));
-	g->map = dup_map(map);
+	if (!g)
+		return (1);
+	ft_memset(g, 0, sizeof(t_game));
+	g->map = get_map(argv[1]);
+	if (!g->map)
+	{
+		free(g);
+		return (1);
+	}
 	g->mlx = mlx_init();
+	if (!g->mlx)
+		destroy_all(g);
 	get_height(g);
 	get_width(g);
-	g->win = mlx_new_window(g->mlx, 100 * g->h, 100 * g->w, "oggy");
-	gen_map(g, 1);
+	g->win = mlx_new_window(g->mlx, 100 * g->w, 100 * g->h, "oggy");
 	mlx_key_hook(g->win, key_lib, g);
+	gen_map(g, 1);
 	mlx_loop(g->mlx);
 	ft_printf("%d", g->nb_move);
 	destroy_all(g);
+	return (0);
 }

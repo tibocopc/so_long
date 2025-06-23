@@ -6,7 +6,7 @@
 /*   By: xx <xx@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:49:05 by xx                #+#    #+#             */
-/*   Updated: 2025/06/10 18:14:07 by xx               ###   ########.fr       */
+/*   Updated: 2025/06/19 14:48:19 by xx               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,26 +75,4 @@ char	*ft_itoa(int n)
 		nb /= 10;
 	}
 	return (res);
-}
-
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	int		len;
-	char	*dest;
-
-	i = 0;
-	len = 0;
-	while (s[len])
-		len++;
-	dest = (char *)malloc(sizeof(char) * len + 1);
-	if (!dest)
-		return (NULL);
-	while (i < len)
-	{
-		dest[i] = s[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
 }

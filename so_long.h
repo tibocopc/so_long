@@ -6,13 +6,14 @@
 /*   By: xx <xx@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:35:51 by xx                #+#    #+#             */
-/*   Updated: 2025/06/10 18:49:56 by xx               ###   ########.fr       */
+/*   Updated: 2025/06/17 15:06:48 by xx               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "gnl/get_next_line.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 # include "reprintf/ft_printf.h"
@@ -60,10 +61,13 @@ void		destroy_all(t_game *g);
 void		get_width(t_game *g);
 void		get_height(t_game *g);
 int			check_exit(t_game *g);
+char		**get_map(char *carte);
 char		**dup_map(char **src);
+char		**ft_split(const char *s, char c);
 char		*ft_itoa(int n);
 static int	len_num(int nb);
 char		*ft_strdup(const char *s);
+void		*ft_memset(void *s, int c, size_t n);
 
 #endif
 

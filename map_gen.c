@@ -6,7 +6,7 @@
 /*   By: xx <xx@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 15:48:05 by xx                #+#    #+#             */
-/*   Updated: 2025/06/10 19:07:40 by xx               ###   ########.fr       */
+/*   Updated: 2025/06/17 14:24:45 by xx               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,50 @@ void	gen_map(t_game *g, int dp)
 	}
 }
 
+char	**get_map(char *carte)
+{
+	char	**map;
+	int		fd;
+	char	*line;
+	char	*all_lines;
+	int		a;
+
+	a = 1;
+	line = 0;
+	all_lines = NULL;
+	fd = open(carte, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	while (a)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		all_lines = ft_strjoin(all_lines, line);
+		free(line);
+	}
+	map = ft_split(all_lines, '\n');
+	free(all_lines);
+	close(fd);
+	return (map);
+}
+
 void	get_width(t_game *g)
 {
-	g->w = 0;
-	while (g->map[g->w])
-	{
-		g->w++;
-	}
+	int	i;
+
+	i = 0;
+	while (g->map[0][i])
+		i++;
+	g->w = i;
 }
 
 void	get_height(t_game *g)
 {
-	g->h = 0;
+	int	i;
 
-	while (g->map[g->w][g->h])
-	{
-		g->h++;
-	}
+	i = 0;
+	while (g->map[i])
+		i++;
+	g->h = i;
 }
